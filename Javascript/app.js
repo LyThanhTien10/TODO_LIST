@@ -10,12 +10,8 @@ const update_btn = document.querySelector('#update_btn');
 const alert_text = document.querySelector('#alert_text');
 
 //! Custom edit_btn is disabled
-edit_btn.style.opacity = '0.5';
-edit_btn.style.cursor = 'default';
-edit_btn.disabled = true;
-update_btn.style.opacity = '0.5';
-update_btn.style.cursor = 'default';
-update_btn.disabled = true;
+Lock_Edit();
+Unlock_Add_Lock_Update();
 
 //! Function to load todo (get todo from LocalStorage) and show on 
 document.addEventListener('DOMContentLoaded', GetTodo);
@@ -30,12 +26,8 @@ document.addEventListener('click',(e)=>{
 
 edit_btn.addEventListener('click',()=>{
     var CheckBox = document.querySelectorAll('.check_todo');
-    update_btn.style.opacity = '1';
-    update_btn.style.cursor = 'pointer';
-    update_btn.disabled = false;
-    edit_btn.style.opacity = '0.5';
-    edit_btn.style.cursor = 'default';
-    edit_btn.disabled = true;
+    Lock_Add_Unlock_Update();
+    Lock_Edit();
 
     for (let i=0;i<CheckBox.length;i++){
         if(CheckBox[i].checked == true){
@@ -49,9 +41,7 @@ edit_btn.addEventListener('click',()=>{
                 Todo.children[0].style.backgroundColor = 'var(--my-blue)';
                 Todo.style.color = 'var(--my-blue)';
                 Todo.style.backgroundColor = 'var(--my-white)';
-                update_btn.style.opacity = '0.5';
-                update_btn.style.cursor = 'default';
-                update_btn.disabled = true;
+                Unlock_Add_Lock_Update();
                 CheckBox[i].checked = false;
                 count--;
             });
@@ -74,17 +64,15 @@ delete_btn.addEventListener('click',()=>{
             CheckBox[i].parentElement.classList.add('delete_animation');
             CheckBox[i].parentElement.addEventListener('transitionend',()=>{
                 CheckBox[i].parentElement.remove();
+                todo_input.value = "";
+                Unlock_Add_Lock_Update();
             })
         }
     }
     if(count==1){
-        edit_btn.style.opacity = '1';
-        edit_btn.style.cursor = 'pointer';
-        edit_btn.disabled = false;
+        Unlock_Edit();
     }else{
-        edit_btn.style.opacity = '0.5';
-        edit_btn.style.cursor = 'default';
-        edit_btn.disabled = true;
+        Lock_Edit();
     }
 });
 
@@ -177,23 +165,17 @@ function Custom_SelectTodo(e){
         todo_bf.style.backgroundColor = 'var(--my-yellow)';
         todo.style.color = 'var(--my-yellow)';
         todo.style.backgroundColor = 'var(--my-black)';
-        console.log(count);
     }
     else{
         count--;
         todo_bf.style.backgroundColor = 'var(--my-blue)';
         todo.style.color = 'var(--my-blue)';
         todo.style.backgroundColor = 'var(--my-white)';
-        console.log(count);
     }
     if(count==1){
-        edit_btn.style.opacity = '1';
-        edit_btn.style.cursor = 'pointer';
-        edit_btn.disabled = false;
+        Unlock_Edit();
     }else{
-        edit_btn.style.opacity = '0.5';
-        edit_btn.style.cursor = 'default';
-        edit_btn.disabled = true;
+        Lock_Edit();
     }
 }
 
@@ -226,4 +208,36 @@ function Delete_LS(todo){
     TodoText = todo.children[1].innerText;
     todo_array.splice(todo_array.indexOf(TodoText), 1);
     localStorage.setItem('todo_array', JSON.stringify(todo_array));
+}
+
+
+
+function Lock_Add_Unlock_Update(){
+    add_btn.style.opacity = '0.5';
+    add_btn.style.cursor = 'default';
+    add_btn.disabled = true;
+    update_btn.style.opacity = '1';
+    update_btn.style.cursor = 'pointer';
+    update_btn.disabled = false;
+}
+
+function Unlock_Add_Lock_Update(){
+    add_btn.style.opacity = '1';
+    add_btn.style.cursor = 'pointer';
+    add_btn.disabled = false;
+    update_btn.style.opacity = '0.5';
+    update_btn.style.cursor = 'default';
+    update_btn.disabled = true;
+}
+
+function Lock_Edit(){
+    edit_btn.style.opacity = '0.5';
+    edit_btn.style.cursor = 'default';
+    edit_btn.disabled = true;
+}
+
+function Unlock_Edit(){
+    edit_btn.style.opacity = '1';
+    edit_btn.style.cursor = 'pointer';
+    edit_btn.disabled = false;
 }
