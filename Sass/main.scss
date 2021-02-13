@@ -1,0 +1,273 @@
+@import url(../Css/font.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: 'My_Font';
+}
+
+*::selection{
+    background-color: var(--my-yellow);
+}
+
+:root{
+    --my-blue: rgb(0, 26, 255);
+    --my-lightblue: rgb(0, 255, 235);
+    --my-darkblue: rgb(0, 160, 150);
+    --my-white: rgb(240, 240, 240);
+    --my-gray: rgb(180, 180, 180);
+    --my-black: rgb(60, 60, 60);
+    --my-green:rgb(45, 255, 0);
+    --my-darkgreen: rgb(5, 165, 0);
+    --my-yellow: rgb(255, 250, 0);
+    --my-darkyellow: rgb(195, 190, 0);
+    --my-red: rgb(255, 110, 110);
+    --my-darkred: rgb(215, 30, 30);
+    --ColorChange : rgb(0, 26, 255);
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-180deg, #BCC5CE 0%, #929EAD 98%), radial-gradient(at top left, rgba(255,255,255,0.30) 0%, rgba(0,0,0,0.30) 100%);
+    background-blend-mode: screen;
+    overflow: hidden;
+}
+
+#header{
+    margin: 30px 0px 0px 0px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--my-blue);
+}
+
+.wrap{
+    width: 95%;
+    height: fit-content;
+    margin: auto;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .control{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        #todo_input{
+            width: 65%;
+            height: 30px;
+            margin: 10px 0px;
+            padding: 2px 6px;
+            font-size: 18px;
+            outline: none;
+            border: 1.5px solid var(--my-gray);
+            background-color: var(--my-white);
+        }
+
+        .button{
+            padding: 0px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+
+
+            button{
+                width: 120px;
+                margin: 10px 10px;
+                padding: 4px 8px;
+                font-size: 18px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 5px;
+                outline: none;
+                
+                svg{
+                    width: 20px;
+                }
+
+                p{
+                    margin: 0px 5px;
+                }
+
+                &:hover{
+                    transform: translate(-1px,-1px);
+                    transition: 0.3s ease-in-out;
+                }
+
+                &:active{
+                    transform: translate(0,0);
+                    transition: 0.1s ease-in-out;
+                }
+            }
+
+            #add_btn{
+                background-color: var(--my-green);
+                border: 1.5px solid var(--my-darkgreen);
+                cursor: pointer;
+
+                &:hover{
+                    box-shadow: 2px 2px 6px var(--my-darkgreen);
+                }
+            }
+
+            #edit_btn{
+                background-color: var(--my-yellow);
+                border: 1.5px solid var(--my-darkyellow);
+
+                &:hover{
+                    box-shadow: 3px 3px 9px var(--my-darkyellow);
+                }
+            }
+
+            #delete_btn{
+                background-color: var(--my-red);
+                border: 1.5px solid var(--my-darkred);
+                cursor: pointer;
+
+                &:hover{
+                    box-shadow: 2px 2px 6px var(--my-darkred);
+                }
+            }
+
+            #update_btn{
+                background-color: var(--my-lightblue);
+                border: 1.5px solid var(--my-darkblue);
+
+                &:hover{
+                    box-shadow: 2px 2px 6px var(--my-darkblue);
+                }
+            }
+        }
+    }
+
+    #alert_text{
+        margin-top: 20px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--my-blue);
+        transition: 0.3s ease-in-out;
+    }
+
+    .todolist{
+        width: 100%;
+        height: 55vh;
+        margin-top: 30px;
+        padding: 20px 0px 20px 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        list-style: none;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: fit-content;
+            margin: 0px 50px;
+        }
+          
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+        }
+        
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background-image: linear-gradient(to bottom, #00a529 0%, #8be001 100%);
+        }
+
+        li{
+            position: relative;
+            width: 65%;
+            margin: 10px 0px;
+            padding: 2px 6px;
+            font-size: 18px;
+            color: var(--my-blue);
+            background-color: var(--my-white);
+            transition: 0.3s ease-in-out;
+
+            .todo_bf{
+                position: absolute;
+                top: 50%;
+                left: -15px;
+                transform: translate(-50%,-50%);
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                background-color: var(--my-blue);
+            }
+
+            .todo_content{
+                width: 100%;
+                height: 30px;
+                display: flex;
+                align-items: center;
+            }
+
+            .check_todo{
+                position: absolute;
+                top: 50%;
+                right: -30px;
+                transform: translate(-50%,-50%);
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+//! HERE IS CLASSLIST ADD BY JAVASCRIPT
+
+.delete_animation{
+    transform: translateY(100px) rotateZ(20deg);
+    opacity: 0;
+}
+
+
+@media screen and (max-width: 640px){
+    .wrap{
+        .control{
+            #todo_input{
+                width: 80%;
+            }
+
+            .button{
+                button{
+                    width: 100px;
+                    font-size: 14px;
+
+                    svg{
+                        width: 15px;
+                    }
+                }
+            }
+        }
+
+        .todolist{
+            li{
+                width: 80%;
+            }
+        }
+    }
+
+    #header{
+        font-size: 32px;
+    }
+}
