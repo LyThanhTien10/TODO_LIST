@@ -49,7 +49,11 @@ edit_btn.addEventListener('click',()=>{
                 Todo.children[0].style.backgroundColor = 'var(--my-blue)';
                 Todo.style.color = 'var(--my-blue)';
                 Todo.style.backgroundColor = 'var(--my-white)';
+                update_btn.style.opacity = '0.5';
+                update_btn.style.cursor = 'default';
+                update_btn.disabled = true;
                 CheckBox[i].checked = false;
+                count--;
             });
         }
     }
