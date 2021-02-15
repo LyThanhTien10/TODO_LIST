@@ -178,7 +178,8 @@ body {
 
 @media screen and (max-width: 640px) {
   .wrap .control #todo_input {
-    width: 80%; }
+    width: 80%;
+    font-size: 14px; }
   .wrap .control .button button {
     width: 100px;
     font-size: 14px; }
